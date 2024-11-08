@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @ToString
 @Entity
@@ -18,7 +19,7 @@ public class CarEntity {
     private Long id;
 
     @Column(name = "make")
-    private String make;
+    private LocalDate make;
 
     @Column(name = "model")
     private String model;
@@ -30,7 +31,7 @@ public class CarEntity {
     private Integer numberOfDoors;
 
     @Column(name = "carbonDioxideEmission")
-    private String carbonDioxideEmission;
+    private BigDecimal carbonDioxideEmission;
 
     @Column(name = "gross")
     private BigDecimal gross;
