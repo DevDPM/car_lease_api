@@ -39,7 +39,7 @@ components:
         numberOfDoors:
           type: integer
         carbonDioxideEmission:
-          type: string
+          type: number
         gross:
           type: number
         nett:
