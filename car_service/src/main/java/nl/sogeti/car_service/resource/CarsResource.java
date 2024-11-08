@@ -39,7 +39,7 @@ public class CarsResource implements CarsApi {
     }
 
     @Override
-//    @RolesAllowed({ "Fun-User" })
+    @RolesAllowed({ "Fun-User" })
     public Response get(Integer id) {
         CarEntity carEntity = getcarEntity(id);
         CarDetail carDetail = carMapper.toCarDetails(carEntity);
