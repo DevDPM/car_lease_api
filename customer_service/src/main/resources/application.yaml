@@ -1,0 +1,26 @@
+quarkus:
+  datasource:
+    username: root
+    password: password
+    db-kind: mysql
+    jdbc:
+      url: jdbc:mysql://localhost:3306/customerDB
+      max-size: 1
+  hibernate-orm:
+    validate-in-dev-mode: false
+    dialect: org.hibernate.dialect.MySQLDialect
+    database:
+      generation: drop-and-create
+    sql-load-script: import.sql
+
+
+  native:
+    resources:
+      includes: publicKey.pem
+
+mp:
+  jwt:
+    verify:
+      issuer: https://localhost:8080/
+      publickey:
+        location: publicKey.pem
