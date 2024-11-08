@@ -17,7 +17,7 @@ import java.net.URI;
 import java.util.List;
 
 @Provider
-@RolesAllowed({ "User" })
+@RolesAllowed({ "Fun-User" })
 public class CustomersResource implements CustomersApi {
 
     private final CustomerRepository customerRepository;
