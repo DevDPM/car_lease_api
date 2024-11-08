@@ -1,4 +1,8 @@
 quarkus:
+  http:
+    port: 8000
+
+  # application Database configuration
   datasource:
     username: root
     password: password
@@ -15,7 +19,6 @@ quarkus:
 
   smallrye-jwt:
     enabled: true
-
   native:
     resources:
       includes: publicKey.pem
@@ -23,6 +26,6 @@ quarkus:
 mp:
   jwt:
     verify:
-      issuer: http://localhost:8080/
+      issuer: http://localhost:8000/
       publickey:
         location: publicKey.pem
