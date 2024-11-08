@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: Car service
+  description: REST Entity service about car details
+  version: 0.1.0
+paths:
+  '/cars/{id}':
+    get:
+      tags:
+        - car
+      summary: Retrieve car details
+      operationId: get
+      parameters:
+        - name: id
+          in: path
+          description: id of a car
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarDetail'
+
+components:
+  schemas:
+    CarDetail:
+      type: object
+      properties:
+        make:
+          type: string
+        model:
+          type: string
+        version:
+          type: string
+        numberOfDoors:
+          type: integer
+        carbonDioxideEmission:
+          type: string
+        gross:
+          type: number
+        nett:
+          type: number
