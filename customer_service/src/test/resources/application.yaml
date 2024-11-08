@@ -1,0 +1,14 @@
+quarkus:
+  smallrye-jwt:
+    enabled: true
+
+  native:
+    resources:
+      includes: publicKey.pem
+
+mp:
+  jwt:
+    verify:
+      issuer: http://localhost:9876/
+      publickey:
+        location: publicKey.pem

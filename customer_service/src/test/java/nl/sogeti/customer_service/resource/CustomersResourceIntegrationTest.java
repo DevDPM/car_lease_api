@@ -27,8 +27,7 @@ class CustomersResourceIntegrationTest {
         public Map<String, String> getConfigOverrides() {
             return Map.of("quarkus.hibernate-orm.persistence-xml.ignore", "true",
                       "smallrye.jwt.sign.key.location", "privateKey.pem",
-                      "quarkus.http.test-port", "9876",
-                      "quarkus.smallrye-jwt.enabled","true");
+                      "quarkus.http.test-port", "9876");
         }
 
         @Override

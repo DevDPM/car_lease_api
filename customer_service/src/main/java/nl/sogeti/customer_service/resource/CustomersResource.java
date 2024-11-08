@@ -24,6 +24,7 @@ public class CustomersResource implements CustomersApi {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
 
+//    TEMPORARY CODE FOR GENERATING JWT
 //    {
 //        System.setProperty("smallrye.jwt.sign.key.location", "privateKey.pem");
 //        String token =
@@ -42,6 +43,7 @@ public class CustomersResource implements CustomersApi {
     }
 
     @Override
+    @RolesAllowed({ "Fun-User" })
     public Response get(Integer id) {
         CustomerEntity customerEntity = getCustomerEntity(id);
         CustomerDetail customerDetail = customerMapper.toCustomerDetail(customerEntity);
@@ -56,6 +58,7 @@ public class CustomersResource implements CustomersApi {
 
     @Override
     @Transactional
+    @RolesAllowed({ "Fun-User" })
     public Response update(Integer id, CustomerDetail customerDetail) {
         CustomerEntity customerEntity = customerRepository.findById(id.longValue());
         customerMapper.updateCustomerEntity(customerEntity, customerDetail);
@@ -65,6 +68,7 @@ public class CustomersResource implements CustomersApi {
 
     @Override
     @Transactional
+    @RolesAllowed({ "Fun-User" })
     public Response create(CustomerDetail customerDetail) {
         CustomerEntity customerEntity = customerMapper.toCustomerEntity(customerDetail);
         customerRepository.persist(customerEntity);
@@ -77,6 +81,8 @@ public class CustomersResource implements CustomersApi {
     }
 
     @Override
+    @Transactional
+    @RolesAllowed({ "Fun-User" })
     public Response delete(Integer id) {
         boolean isCustomerDeleted = customerRepository.deleteById(id.longValue());
 
@@ -88,6 +94,7 @@ public class CustomersResource implements CustomersApi {
     }
 
     @Override
+    @RolesAllowed({ "Fun-User" })
     public Response getAll() {
         List<CustomerEntity> customerEntities = customerRepository.findAll().list();
         CustomerDetails customerDetails = customerMapper.toCustomerDetails(customerEntities);

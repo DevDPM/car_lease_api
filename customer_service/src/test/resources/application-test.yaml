@@ -1,9 +1,0 @@
-quarkus:
-  smallrye-jwt:
-    enabled: true
-
-  jwt:
-    verify:
-      publickey:
-        location: publicKey.pem
-      issuer: http://localhost:9876/
