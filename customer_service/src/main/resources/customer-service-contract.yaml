@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: Customer service
+  description: REST Entity service about customer details
+  version: 0.1.0
+paths:
+  '/customers/{id}':
+    get:
+      tags:
+        - customer
+      summary: Retrieve customer details
+      operationId: get
+      parameters:
+        - name: id
+          in: path
+          description: id of customer
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerDetail'
+    put:
+      tags:
+        - customer
+      summary: Retrieve customer details
+      operationId: update
+      parameters:
+        - name: id
+          in: path
+          description: id of customer
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update customer by id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerDetail'
+      responses:
+        "204":
+          description: No Content
+    delete:
+      tags:
+        - customer
+      summary: Retrieve customer details
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          description: id of customer
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  '/customers':
+    get:
+      tags:
+        - customer
+      summary: Retrieve all customers details
+      operationId: getAll
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerDetails'
+    post:
+      tags:
+        - customer
+      summary: Retrieve all customers details
+      operationId: create
+      requestBody:
+        description: Update customer by id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerDetail'
+      responses:
+        "201":
+          description: Created
+        "409":
+          description: Conflict
+
+components:
+  schemas:
+    CustomerDetails:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerDetail'
+    CustomerDetail:
+      type: object
+      properties:
+        name:
+          type: string
+        street:
+          type: string
+        houseNumber:
+          type: string
+        zipCode:
+          type: string
+        place:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
