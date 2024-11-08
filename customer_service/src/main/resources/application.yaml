@@ -13,6 +13,8 @@ quarkus:
       generation: drop-and-create
     sql-load-script: import.sql
 
+  smallrye-jwt:
+    enabled: true
 
   native:
     resources:
@@ -21,6 +23,6 @@ quarkus:
 mp:
   jwt:
     verify:
-      issuer: https://localhost:8080/
+      issuer: http://localhost:8080/
       publickey:
         location: publicKey.pem

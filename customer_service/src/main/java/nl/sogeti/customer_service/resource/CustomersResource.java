@@ -1,6 +1,8 @@
 package nl.sogeti.customer_service.resource;
 
+import io.smallrye.jwt.build.Jwt;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
@@ -11,17 +13,26 @@ import nl.sogeti.customer_service.dto.CustomerDetail;
 import nl.sogeti.customer_service.dto.CustomerDetails;
 import nl.sogeti.customer_service.dto.mapper.CustomerMapper;
 import nl.sogeti.customer_service.entity.CustomerEntity;
-import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.net.URI;
+import java.util.HashSet;
 import java.util.List;
 
 @Provider
-@RolesAllowed({ "Fun-User" })
 public class CustomersResource implements CustomersApi {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+
+//    {
+//        System.setProperty("smallrye.jwt.sign.key.location", "privateKey.pem");
+//        String token =
+//                Jwt.issuer("http://localhost:8080/")
+//                        .upn("daniel@example.com")
+//                        .groups(new HashSet<>(List.of("Fun-User")))
+//                        .sign();
+//        System.out.println(token);
+//    }
 
     @Inject
     public CustomersResource(CustomerRepository customerRepository,
