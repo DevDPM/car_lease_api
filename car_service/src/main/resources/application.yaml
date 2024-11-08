@@ -1,0 +1,30 @@
+quarkus:
+  http:
+    port: 8001
+  datasource:
+    username: root
+    password: password
+    db-kind: mysql
+    jdbc:
+      url: jdbc:mysql://localhost:3307/carDB
+      max-size: 1
+  hibernate-orm:
+    validate-in-dev-mode: false
+    dialect: org.hibernate.dialect.MySQLDialect
+    database:
+      generation: drop-and-create
+    sql-load-script: import.sql
+
+  smallrye-jwt:
+    enabled: true
+
+  native:
+    resources:
+      includes: publicKey.pem
+
+mp:
+  jwt:
+    verify:
+      issuer: http://localhost:8001/
+      publickey:
+        location: publicKey.pem
