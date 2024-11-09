@@ -1,0 +1,56 @@
+openapi: 3.0.3
+info:
+  title: Customer service
+  description: REST Entity service about customer details
+  version: 0.1.0
+paths:
+  '/cars/{id}/leaserate':
+    get:
+      tags:
+        - leaserate
+      summary: Retrieve lease rate details
+      operationId: get
+      parameters:
+        - name: carId
+          in: path
+          description: id of car
+          required: true
+          schema:
+            type: integer
+        - name: mileage
+          in: query
+          description: the amount of kilometers on annual base
+          required: true
+          schema:
+            type: integer
+        - name: duration
+          in: query
+          description: the number of months in the contract
+          required: true
+          schema:
+            type: integer
+        - name: interestrate
+          in: query
+          description: Interest rate with startdate
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseRateDetails'
+        "404":
+          description: Car not found
+        "400":
+          description: Bad request
+
+components:
+  schemas:
+    LeaseRateDetails:
+      type: object
+      properties:
+        leaserate:
+          type: number
