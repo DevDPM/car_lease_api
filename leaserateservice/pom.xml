@@ -69,7 +69,7 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest-client-jackson</artifactId>
+            <artifactId>quarkus-resteasy-client-jackson</artifactId>
         </dependency>
 
         <!-- Test -->
@@ -187,26 +187,6 @@
                             </configOptions>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>generate Client's DTO</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <generatorName>jaxrs-spec</generatorName>
-                            <generateModels>true</generateModels>
-                            <generateApis>false</generateApis>
-                            <generateSupportingFiles>false</generateSupportingFiles>
-                            <generateApiTests>false</generateApiTests>
-                            <generateModelTests>false</generateModelTests>
-                            <inputSpec>${project.basedir}/src/main/resources/car-service-contract.yaml</inputSpec>
-                            <configOptions>
-                                <modelPackage>nl.sogeti.leaserateservice.di.carservice.dto</modelPackage>
-                                <useJakartaEe>true</useJakartaEe>
-                                <useSwaggerAnnotations>false</useSwaggerAnnotations>
-                            </configOptions>
-                        </configuration>
-                    </execution>
 <!--                    <execution>-->
 <!--                        <id>generate rest client</id>-->
 <!--                        <goals>-->
@@ -216,13 +196,13 @@
 <!--                            <generatorName>java</generatorName>-->
 <!--                            <library>microprofile</library>-->
 <!--                            <modelPackage>true</modelPackage>-->
-<!--                            <generateApis>true</generateApis> &lt;!&ndash; Jakarta config not working, Create client manually &ndash;&gt;-->
+<!--                            <generateApis>true</generateApis> &lt;!&ndash; Jakarta config not working, Create client/dto's manually &ndash;&gt;-->
 <!--                            <generateSupportingFiles>true</generateSupportingFiles>-->
 <!--                            <generateApiTests>false</generateApiTests>-->
 <!--                            <generateModelTests>false</generateModelTests>-->
 <!--                            <inputSpec>${project.basedir}/src/main/resources/car-service-contract.yaml</inputSpec>-->
 <!--                            <configOptions>-->
-<!--                                <useJakartaEe>true</useJakartaEe> &lt;!&ndash; Jakarta config not working, Create client manually &ndash;&gt;-->
+<!--                                <useJakartaEe>true</useJakartaEe> &lt;!&ndash; Jakarta config not working, Create client/dto's manually &ndash;&gt;-->
 <!--                                <interfaceOnly>false</interfaceOnly>-->
 <!--                                <serializableModel>true</serializableModel>-->
 <!--                                <sourceFolder>src/gen/main/java</sourceFolder>-->
