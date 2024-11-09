@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Customer service
-  description: REST Entity service about customer details
+  title: Leaserate service
+  description: REST Composite service about leaserate details
   version: 0.1.0
 paths:
   '/cars/{id}/leaserate':
