@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>nl.sogeti.car_lease_api</groupId>
-    <artifactId>car_lease_api</artifactId>
+    <artifactId>carleaseapi</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
