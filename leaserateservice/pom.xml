@@ -41,11 +41,6 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-            <version>${mapstruct.version}</version>
-        </dependency>
 
         <!-- Quarkus specific dependencies -->
         <dependency>
@@ -58,10 +53,6 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-hibernate-orm-panache</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-smallrye-jwt</artifactId>
         </dependency>
         <dependency>
@@ -70,19 +61,15 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jdbc-mysql</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-hibernate-orm</artifactId>
+            <artifactId>quarkus-config-yaml</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-config-yaml</artifactId>
+            <artifactId>quarkus-rest-client-jackson</artifactId>
         </dependency>
 
         <!-- Test -->
@@ -99,11 +86,6 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-test-security-jwt</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jdbc-h2</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -137,31 +119,10 @@
                 <configuration>
                     <parameters>true</parameters>
                     <release>${maven.compiler.release}</release>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct.version}</version>
-                        </path>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok-mapstruct-binding</artifactId>
-                            <version>${lombok-mapstruct-bindin.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
+
                     <showWarnings>true</showWarnings>
                     <compilerArgs>
                         <arg>-parameters</arg>
-                        <arg>-Amapstruct.suppressGeneratorTimestamp=true</arg>
-                        <arg>-Amapstruct.suppressGeneratorVersionInfoComment=true</arg>
-                        <arg>-Amapstruct.verbose=true</arg>
-                        <arg>-Amapstruct.defaultComponentModel=cdi</arg>
-                        <arg>-Amapstruct.unmappedTargetPolicy=ERROR</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
@@ -226,6 +187,49 @@
                             </configOptions>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>generate Client's DTO</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <generatorName>jaxrs-spec</generatorName>
+                            <generateModels>true</generateModels>
+                            <generateApis>false</generateApis>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <generateApiTests>false</generateApiTests>
+                            <generateModelTests>false</generateModelTests>
+                            <inputSpec>${project.basedir}/src/main/resources/car-service-contract.yaml</inputSpec>
+                            <configOptions>
+                                <modelPackage>nl.sogeti.leaserateservice.di.carservice.dto</modelPackage>
+                                <useJakartaEe>true</useJakartaEe>
+                                <useSwaggerAnnotations>false</useSwaggerAnnotations>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+<!--                    <execution>-->
+<!--                        <id>generate rest client</id>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <generatorName>java</generatorName>-->
+<!--                            <library>microprofile</library>-->
+<!--                            <modelPackage>true</modelPackage>-->
+<!--                            <generateApis>true</generateApis> &lt;!&ndash; Jakarta config not working, Create client manually &ndash;&gt;-->
+<!--                            <generateSupportingFiles>true</generateSupportingFiles>-->
+<!--                            <generateApiTests>false</generateApiTests>-->
+<!--                            <generateModelTests>false</generateModelTests>-->
+<!--                            <inputSpec>${project.basedir}/src/main/resources/car-service-contract.yaml</inputSpec>-->
+<!--                            <configOptions>-->
+<!--                                <useJakartaEe>true</useJakartaEe> &lt;!&ndash; Jakarta config not working, Create client manually &ndash;&gt;-->
+<!--                                <interfaceOnly>false</interfaceOnly>-->
+<!--                                <serializableModel>true</serializableModel>-->
+<!--                                <sourceFolder>src/gen/main/java</sourceFolder>-->
+<!--                                <modelPackage>nl.sogeti.leaserateservice.di.carservice.dto</modelPackage>-->
+<!--                            </configOptions>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
                 </executions>
             </plugin>
         </plugins>
