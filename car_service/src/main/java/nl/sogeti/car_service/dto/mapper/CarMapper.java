@@ -1,6 +1,6 @@
 package nl.sogeti.car_service.dto.mapper;
 
-import nl.sogeti.car_service.dto.CarDetail;
+import nl.sogeti.car_service.dto.CarDetails;
 import nl.sogeti.car_service.entity.CarEntity;
 import org.mapstruct.*;
 
@@ -18,5 +18,5 @@ public interface CarMapper {
             @Mapping(source = "gross", target = "gross"),
             @Mapping(source = "nett", target = "nett"),
     })
-    CarDetail toCarDetails(CarEntity carEntity);
+    CarDetails toCarDetails(CarEntity carEntity);
 }
