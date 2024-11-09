@@ -64,13 +64,14 @@ class CustomersResourceIntegrationTest {
                 .extract().header("Location");
 
         // then
-        assertEquals(location, "http://localhost:9876/customers/2");
+        assertEquals("http://localhost:9876/customers/2", location);
     }
 
     @Test
     @Order(3)
     void update() {
         // given
+        final int ID = 1;
         CustomerDetails customerDetail = new CustomerDetails();
         customerDetail.setName("Wesley");
 
@@ -80,7 +81,7 @@ class CustomersResourceIntegrationTest {
                 .headers("Authorization", "Bearer " + JWT_TOKEN)
                 .when()
                 .body(customerDetail)
-                .pathParam("id", 1)
+                .pathParam("id", ID)
                 .put("/customers/{id}")
                 .then()
                 .statusCode(204);
@@ -115,7 +116,6 @@ class CustomersResourceIntegrationTest {
                 .delete("/customers/{id}")
                 .then()
                 .statusCode(204);
-
     }
 
     @Test
@@ -133,6 +133,5 @@ class CustomersResourceIntegrationTest {
                 .delete("/customers/{id}")
                 .then()
                 .statusCode(404);
-
     }
 }
