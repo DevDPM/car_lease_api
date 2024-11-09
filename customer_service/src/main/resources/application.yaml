@@ -15,7 +15,7 @@ quarkus:
     dialect: org.hibernate.dialect.MySQLDialect
     database:
       generation: drop-and-create
-    sql-load-script: import.sql
+    sql-load-script: META-INF/import.sql
 
   smallrye-jwt:
     enabled: true

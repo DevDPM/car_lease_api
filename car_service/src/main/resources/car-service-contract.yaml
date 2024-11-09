@@ -99,7 +99,7 @@ components:
     CarsDetails:
       type: object
       properties:
-        customers:
+        cars:
           type: array
           items:
             $ref: '#/components/schemas/CarDetails'
