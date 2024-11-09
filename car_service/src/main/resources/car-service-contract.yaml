@@ -1,19 +1,19 @@
 openapi: 3.0.3
 info:
-  title: Customer service
-  description: REST Entity service about customer details
+  title: Car service
+  description: REST Entity service about car details
   version: 0.1.0
 paths:
-  '/customers/{id}':
+  '/cars/{id}':
     get:
       tags:
-        - customer
-      summary: Retrieve customer details
+        - cars
+      summary: Retrieve car details
       operationId: get
       parameters:
         - name: id
           in: path
-          description: id of customer
+          description: id of car
           required: true
           schema:
             type: integer
@@ -23,38 +23,38 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerDetails'
+                $ref: '#/components/schemas/CarDetails'
     put:
       tags:
-        - customer
-      summary: Retrieve customer details
+        - cars
+      summary: Retrieve car details
       operationId: update
       parameters:
         - name: id
           in: path
-          description: id of customer
+          description: id of car
           required: true
           schema:
             type: integer
       requestBody:
-        description: Update customer by id
+        description: Update car by id
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomerDetails'
+              $ref: '#/components/schemas/CarDetails'
       responses:
         "204":
           description: No Content
     delete:
       tags:
-        - customer
-      summary: Retrieve customer details
+        - cars
+      summary: Retrieve car details
       operationId: delete
       parameters:
         - name: id
           in: path
-          description: id of customer
+          description: id of car
           required: true
           schema:
             type: integer
@@ -63,11 +63,11 @@ paths:
           description: No Content
         "404":
           description: Not Found
-  '/customers':
+  '/cars':
     get:
       tags:
-        - customer
-      summary: Retrieve all customers details
+        - cars
+      summary: Retrieve all cars details
       operationId: getAll
       responses:
         "200":
@@ -75,19 +75,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerDetails'
+                $ref: '#/components/schemas/CarDetails'
     post:
       tags:
-        - customer
-      summary: Retrieve all customers details
+        - cars
+      summary: Retrieve all cars details
       operationId: create
       requestBody:
-        description: Update customer by id
+        description: Update car by id
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomerDetails'
+              $ref: '#/components/schemas/CarDetails'
       responses:
         "201":
           description: Created
@@ -96,27 +96,27 @@ paths:
 
 components:
   schemas:
-    CustomersDetails:
+    CarsDetails:
       type: object
       properties:
-        customers:
+        cars:
           type: array
           items:
-            $ref: '#/components/schemas/CustomerDetails'
-    CustomerDetails:
+            $ref: '#/components/schemas/CarDetails'
+    CarDetails:
       type: object
       properties:
-        name:
+        make:
           type: string
-        street:
+        model:
           type: string
-        houseNumber:
+        version:
           type: string
-        zipCode:
-          type: string
-        place:
-          type: string
-        email:
-          type: string
-        phoneNumber:
-          type: string
+        numberOfDoors:
+          type: integer
+        carbonDioxideEmission:
+          type: number
+        gross:
+          type: number
+        nett:
+          type: number

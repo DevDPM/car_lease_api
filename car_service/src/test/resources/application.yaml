@@ -1,6 +1,6 @@
 quarkus:
   http:
-    test-port: 9876
+    test-port: 9877
 
   # application Database configuration
   datasource:
@@ -24,7 +24,7 @@ quarkus:
 mp:
   jwt:
     verify:
-      issuer: http://localhost:9876/
+      issuer: http://localhost:9877/
       publickey:
         location: publicKey.pem
 
