@@ -1,0 +1,35 @@
+quarkus:
+  http:
+    test-port: 9877
+
+  # application Database configuration
+  datasource:
+    db-kind: h2
+    jdbc:
+      url: jdbc:h2:mem:db
+      max-size: 2
+  hibernate-orm:
+    dialect: org.hibernate.dialect.H2Dialect
+    database:
+      generation: drop-and-create
+    sql-load-script: META-INF/integration-test-data/testdata.sql
+
+  smallrye-jwt:
+    enabled: true
+
+  native:
+    resources:
+      includes: publicKey.pem
+
+mp:
+  jwt:
+    verify:
+      issuer: http://localhost:9877/
+      publickey:
+        location: publicKey.pem
+
+smallrye:
+  jwt:
+    sign:
+      key:
+        location: privateKey.pem

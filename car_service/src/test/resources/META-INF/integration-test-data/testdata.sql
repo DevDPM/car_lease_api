@@ -1,0 +1,1 @@
+INSERT INTO car (make, model, version, numberOfDoors, carbonDioxideEmission, gross, nett) values ('2024-01-01','RS','v4.1','5',100,34500.99,30000.99);
