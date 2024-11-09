@@ -14,7 +14,7 @@ import java.net.URI;
 @Dependent
 public class CarsApiClient {
 
-    private final URI CarsURI = URI.create("http://localhost:8000/");
+    private final URI CarsURI = URI.create("http://localhost:8001/");
 
     public CarDetails getCarDetails(Integer carId) {
         try {
