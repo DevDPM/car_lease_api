@@ -7,13 +7,13 @@ paths:
   '/cars/{id}':
     get:
       tags:
-        - car
+        - cars
       summary: Retrieve car details
       operationId: get
       parameters:
         - name: id
           in: path
-          description: id of a car
+          description: id of car
           required: true
           schema:
             type: integer
@@ -23,11 +23,87 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CarDetail'
+                $ref: '#/components/schemas/CarDetails'
+    put:
+      tags:
+        - cars
+      summary: Retrieve car details
+      operationId: update
+      parameters:
+        - name: id
+          in: path
+          description: id of car
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update car by id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarDetails'
+      responses:
+        "204":
+          description: No Content
+    delete:
+      tags:
+        - cars
+      summary: Retrieve car details
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          description: id of car
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  '/cars':
+    get:
+      tags:
+        - cars
+      summary: Retrieve all cars details
+      operationId: getAll
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarDetails'
+    post:
+      tags:
+        - cars
+      summary: Retrieve all cars details
+      operationId: create
+      requestBody:
+        description: Update car by id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarDetails'
+      responses:
+        "201":
+          description: Created
+        "409":
+          description: Conflict
 
 components:
   schemas:
-    CarDetail:
+    CarsDetails:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarDetails'
+    CarDetails:
       type: object
       properties:
         make:
