@@ -2,7 +2,6 @@ package nl.sogeti.customer_service.resource;
 
 import io.smallrye.jwt.build.Jwt;
 import jakarta.annotation.security.RolesAllowed;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
@@ -97,7 +96,7 @@ public class CustomersResource implements CustomersApi {
     @RolesAllowed({ "Fun-User" })
     public Response getAll() {
         List<CustomerEntity> customerEntities = customerRepository.findAll().list();
-        CustomersDetails customerDetails = customerMapper.toCustomerDetails(customerEntities);
+        CustomersDetails customerDetails = customerMapper.toCustomersDetails(customerEntities);
         return Response.ok(customerDetails).build();
     }
 }

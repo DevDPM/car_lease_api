@@ -44,13 +44,18 @@ public interface CustomerMapper {
             @Mapping(source = "email", target = "email"),
             @Mapping(source = "phoneNumber", target = "phoneNumber"),
     })
-    void updateCustomerEntity(@MappingTarget CustomerEntity customerEntity, CustomerDetails customerDetail);
+    void updateCustomerEntity(@MappingTarget CustomerEntity customerEntity, CustomerDetails customerDetails);
 
-    default CustomersDetails toCustomerDetails(List<CustomerEntity> customerEntities) {
-        List<CustomerDetails> customerDetailList = customerEntities.stream().map(this::toCustomerDetail).toList();
+    default CustomersDetails toCustomersDetails(List<CustomerEntity> customerEntities) {
+        List<CustomerDetails> customerDetailsList = mapToCustomerDetailsList(customerEntities);
+        CustomersDetails customersDetails = new CustomersDetails();
+        customersDetails.setCustomers(customerDetailsList);
+        return customersDetails;
+    }
 
-        CustomersDetails customerDetailWrapper = new CustomersDetails();
-        customerDetailWrapper.setCustomers(customerDetailList);
-        return customerDetailWrapper;
+    private List<CustomerDetails> mapToCustomerDetailsList(List<CustomerEntity> customerEntities) {
+        return customerEntities.stream()
+                               .map(this::toCustomerDetail)
+                               .toList();
     }
 }
