@@ -19,14 +19,14 @@ public class LeaserateResource implements CarsApi {
     private final LeaserateService leaserateService;
 
     // TEMPORARY CODE FOR GENERATING JWT FOR TESTING PURPOSE
-//    {
-//        String token =
-//                Jwt.issuer("http://localhost:9999/")
-//                        .upn("daniel@example.com")
-//                        .groups(new HashSet<>(List.of("Fun-User")))
-//                        .sign();
-//        System.out.println(token);
-//    }
+    {
+        String token =
+                Jwt.issuer("http://localhost:9999/")
+                        .upn("daniel@example.com")
+                        .groups(new HashSet<>(List.of("Fun-User")))
+                        .sign();
+        System.out.println(token);
+    }
 
     @Inject
     public LeaserateResource(LeaserateService leaserateService) {
