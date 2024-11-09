@@ -23,7 +23,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerDetail'
+                $ref: '#/components/schemas/CustomerDetails'
     put:
       tags:
         - customer
@@ -42,7 +42,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomerDetail'
+              $ref: '#/components/schemas/CustomerDetails'
       responses:
         "204":
           description: No Content
@@ -87,7 +87,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomerDetail'
+              $ref: '#/components/schemas/CustomerDetails'
       responses:
         "201":
           description: Created
@@ -96,14 +96,14 @@ paths:
 
 components:
   schemas:
-    CustomerDetails:
+    CustomersDetails:
       type: object
       properties:
         customers:
           type: array
           items:
-            $ref: '#/components/schemas/CustomerDetail'
-    CustomerDetail:
+            $ref: '#/components/schemas/CustomerDetails'
+    CustomerDetails:
       type: object
       properties:
         name:

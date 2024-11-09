@@ -1,40 +1,21 @@
 package nl.sogeti.customer_service.resource;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.QuarkusTestProfile;
-import io.quarkus.test.junit.TestProfile;
 import io.smallrye.jwt.build.Jwt;
-import nl.sogeti.customer_service.dto.CustomerDetail;
+import nl.sogeti.customer_service.dto.CustomerDetails;
 import org.junit.jupiter.api.*;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasKey;
 import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
 @Tag("integration")
-@TestProfile(CustomersResourceIntegrationTest.BuildTimeValueChangeTestProfile.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CustomersResourceIntegrationTest {
-
-    public static class BuildTimeValueChangeTestProfile implements QuarkusTestProfile {
-        @Override
-        public Map<String, String> getConfigOverrides() {
-            return Map.of("quarkus.hibernate-orm.persistence-xml.ignore", "true",
-                      "smallrye.jwt.sign.key.location", "privateKey.pem",
-                      "quarkus.http.test-port", "9876");
-        }
-
-        @Override
-        public String getConfigProfile() {
-            return QuarkusTestProfile.super.getConfigProfile();
-        }
-    }
 
     private String JWT_TOKEN;
 
@@ -68,7 +49,7 @@ class CustomersResourceIntegrationTest {
     @Order(2)
     void create_created() {
         // given
-        CustomerDetail customerDetail = new CustomerDetail();
+        CustomerDetails customerDetail = new CustomerDetails();
         customerDetail.setName("Wesley");
 
         // when
@@ -90,7 +71,7 @@ class CustomersResourceIntegrationTest {
     @Order(3)
     void update() {
         // given
-        CustomerDetail customerDetail = new CustomerDetail();
+        CustomerDetails customerDetail = new CustomerDetails();
         customerDetail.setName("Wesley");
 
         // when

@@ -9,8 +9,8 @@ import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
 import nl.sogeti.customer_service.di.CustomerRepository;
-import nl.sogeti.customer_service.dto.CustomerDetail;
 import nl.sogeti.customer_service.dto.CustomerDetails;
+import nl.sogeti.customer_service.dto.CustomersDetails;
 import nl.sogeti.customer_service.dto.mapper.CustomerMapper;
 import nl.sogeti.customer_service.entity.CustomerEntity;
 
@@ -46,7 +46,7 @@ public class CustomersResource implements CustomersApi {
     @RolesAllowed({ "Fun-User" })
     public Response get(Integer id) {
         CustomerEntity customerEntity = getCustomerEntity(id);
-        CustomerDetail customerDetail = customerMapper.toCustomerDetail(customerEntity);
+        CustomerDetails customerDetail = customerMapper.toCustomerDetail(customerEntity);
 
         return Response.ok(customerDetail).build();
     }
@@ -59,9 +59,9 @@ public class CustomersResource implements CustomersApi {
     @Override
     @Transactional
     @RolesAllowed({ "Fun-User" })
-    public Response update(Integer id, CustomerDetail customerDetail) {
+    public Response update(Integer id, CustomerDetails customerDetails) {
         CustomerEntity customerEntity = customerRepository.findById(id.longValue());
-        customerMapper.updateCustomerEntity(customerEntity, customerDetail);
+        customerMapper.updateCustomerEntity(customerEntity, customerDetails);
 
         return Response.noContent().build();
     }
@@ -69,8 +69,8 @@ public class CustomersResource implements CustomersApi {
     @Override
     @Transactional
     @RolesAllowed({ "Fun-User" })
-    public Response create(CustomerDetail customerDetail) {
-        CustomerEntity customerEntity = customerMapper.toCustomerEntity(customerDetail);
+    public Response create(CustomerDetails customerDetails) {
+        CustomerEntity customerEntity = customerMapper.toCustomerEntity(customerDetails);
         customerRepository.persist(customerEntity);
 
         if (!customerRepository.isPersistent(customerEntity)) {
@@ -97,7 +97,7 @@ public class CustomersResource implements CustomersApi {
     @RolesAllowed({ "Fun-User" })
     public Response getAll() {
         List<CustomerEntity> customerEntities = customerRepository.findAll().list();
-        CustomerDetails customerDetails = customerMapper.toCustomerDetails(customerEntities);
+        CustomersDetails customerDetails = customerMapper.toCustomerDetails(customerEntities);
         return Response.ok(customerDetails).build();
     }
 }

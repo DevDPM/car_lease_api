@@ -1,7 +1,7 @@
 package nl.sogeti.customer_service.dto.mapper;
 
-import nl.sogeti.customer_service.dto.CustomerDetail;
 import nl.sogeti.customer_service.dto.CustomerDetails;
+import nl.sogeti.customer_service.dto.CustomersDetails;
 import nl.sogeti.customer_service.entity.CustomerEntity;
 import org.mapstruct.*;
 
@@ -19,7 +19,7 @@ public interface CustomerMapper {
             @Mapping(source = "email", target = "email"),
             @Mapping(source = "phoneNumber", target = "phoneNumber"),
     })
-    CustomerDetail toCustomerDetail(CustomerEntity customerEntity);
+    CustomerDetails toCustomerDetail(CustomerEntity customerEntity);
 
     @Mappings(value = {
             @Mapping(target = "id", ignore = true),
@@ -31,7 +31,7 @@ public interface CustomerMapper {
             @Mapping(source = "email", target = "email"),
             @Mapping(source = "phoneNumber", target = "phoneNumber"),
     })
-    CustomerEntity toCustomerEntity(CustomerDetail customerDetail);
+    CustomerEntity toCustomerEntity(CustomerDetails customerDetail);
 
     @BeanMapping(nullValuePropertyMappingStrategy =  NullValuePropertyMappingStrategy.IGNORE)
     @Mappings(value = {
@@ -44,12 +44,12 @@ public interface CustomerMapper {
             @Mapping(source = "email", target = "email"),
             @Mapping(source = "phoneNumber", target = "phoneNumber"),
     })
-    void updateCustomerEntity(@MappingTarget CustomerEntity customerEntity, CustomerDetail customerDetail);
+    void updateCustomerEntity(@MappingTarget CustomerEntity customerEntity, CustomerDetails customerDetail);
 
-    default CustomerDetails toCustomerDetails(List<CustomerEntity> customerEntities) {
-        List<CustomerDetail> customerDetailList = customerEntities.stream().map(this::toCustomerDetail).toList();
+    default CustomersDetails toCustomerDetails(List<CustomerEntity> customerEntities) {
+        List<CustomerDetails> customerDetailList = customerEntities.stream().map(this::toCustomerDetail).toList();
 
-        CustomerDetails customerDetailWrapper = new CustomerDetails();
+        CustomersDetails customerDetailWrapper = new CustomersDetails();
         customerDetailWrapper.setCustomers(customerDetailList);
         return customerDetailWrapper;
     }
