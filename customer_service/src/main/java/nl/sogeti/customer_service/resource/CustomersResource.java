@@ -27,7 +27,7 @@ public class CustomersResource implements CustomersApi {
 //    {
 //        System.setProperty("smallrye.jwt.sign.key.location", "privateKey.pem");
 //        String token =
-//                Jwt.issuer("http://localhost:8000/")
+//                Jwt.issuer("http://localhost:9999/")
 //                        .upn("daniel@example.com")
 //                        .groups(new HashSet<>(List.of("Fun-User")))
 //                        .sign();

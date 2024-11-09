@@ -1,5 +1,6 @@
 package nl.sogeti.car_service.resource;
 
+import io.smallrye.jwt.build.Jwt;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -13,6 +14,7 @@ import nl.sogeti.car_service.dto.mapper.CarMapper;
 import nl.sogeti.car_service.entity.CarEntity;
 
 import java.net.URI;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -26,7 +28,7 @@ public class CarsResource implements CarsApi {
 //    {
 //        System.setProperty("smallrye.jwt.sign.key.location", "privateKey.pem");
 //        String token =
-//                Jwt.issuer("http://localhost:8001/")
+//                Jwt.issuer("http://localhost:9999/")
 //                        .upn("daniel@example.com")
 //                        .groups(new HashSet<>(List.of("Fun-User")))
 //                        .sign();
