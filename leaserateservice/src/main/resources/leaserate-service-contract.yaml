@@ -11,7 +11,7 @@ paths:
       summary: Retrieve lease rate details
       operationId: get
       parameters:
-        - name: carId
+        - name: id
           in: path
           description: id of car
           required: true
