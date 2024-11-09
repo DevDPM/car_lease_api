@@ -20,16 +20,16 @@ public class LeaserateService {
         this.carsApiClient = carsApiClient;
     }
 
-    public LeaseRateDetails calculateLeaserate(Integer carId, Integer mileage, Integer duration, BigDecimal interestrate) {
+    public LeaseRateDetails getLeaserateDetails(Integer carId, Integer mileage, Integer duration, BigDecimal interestrate) {
         CarDetails carDetails = carsApiClient.getCarDetails(carId);
-        BigDecimal leaserate = calculateLeaserate(mileage, duration, carDetails.getNett(), interestrate);
+        BigDecimal leaseratePerMonth = getLeaseratePerMonth(mileage, duration, carDetails.getNett(), interestrate);
 
         LeaseRateDetails leaseRateDetails = new LeaseRateDetails();
-        leaseRateDetails.setLeaserate(leaserate);
+        leaseRateDetails.setLeaserate(leaseratePerMonth);
         return leaseRateDetails;
     }
 
-    private BigDecimal calculateLeaserate(Integer mileage, Integer durationInMonths, BigDecimal nett, BigDecimal interestrate) {
+    private BigDecimal getLeaseratePerMonth(Integer mileage, Integer durationInMonths, BigDecimal nett, BigDecimal interestrate) {
         BigDecimal mileageBigDecimal = new BigDecimal(mileage);
         BigDecimal durationBigDecimal = new BigDecimal(durationInMonths);
         MathContext mathConfigs = new MathContext(10, RoundingMode.HALF_UP);
