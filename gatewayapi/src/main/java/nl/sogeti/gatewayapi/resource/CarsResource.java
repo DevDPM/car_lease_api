@@ -6,10 +6,13 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
 import nl.sogeti.gatewayapi.di.carservice.client.CarsClient;
 import nl.sogeti.gatewayapi.di.carservice.dto.CarDetails;
-import nl.sogeti.gatewayapi.di.leaserateservice.client.LeaserateClient;
+import nl.sogeti.gatewayapi.di.leaserateservice.client.LeaseRateClient;
+import nl.sogeti.gatewayapi.di.leaserateservice.dto.LeaseRateDetails;
 import nl.sogeti.gatewayapi.dto.CarDto;
 import nl.sogeti.gatewayapi.dto.CarsDto;
+import nl.sogeti.gatewayapi.dto.LeaseRateDto;
 import nl.sogeti.gatewayapi.dto.mapper.CarMapper;
+import nl.sogeti.gatewayapi.dto.mapper.LeaseRateMapper;
 
 import java.math.BigDecimal;
 import java.net.URI;
@@ -20,16 +23,17 @@ public class CarsResource implements CarsApi {
 
     private final CarsClient carsClient;
     private final CarMapper carMapper;
-    private final LeaserateClient leaserateService;
+    private final LeaseRateClient leaseRateService;
+    private final LeaseRateMapper leaseRateMapper;
 
     @Inject
     public CarsResource(CarsClient carsClient, CarMapper carMapper,
-                        LeaserateClient leaserateService) {
+                        LeaseRateClient leaseRateService, LeaseRateMapper leaseRateMapper) {
         this.carsClient = carsClient;
         this.carMapper = carMapper;
-        this.leaserateService = leaserateService;
+        this.leaseRateService = leaseRateService;
+        this.leaseRateMapper = leaseRateMapper;
     }
-
 
     @Override
     public Response createCar(CarDto carDto) {
@@ -58,17 +62,28 @@ public class CarsResource implements CarsApi {
 
     @Override
     public Response getCar(Integer id) {
-        return null;
+        CarDetails carDetails = carsClient.getCarDetails(id);
+        CarDto carDto = carMapper.toCarDto(carDetails);
+        return Response.ok(carDto).build();
     }
 
     @Override
     public Response getLeaserate(Integer id, Integer mileage, Integer duration, BigDecimal interestrate) {
-        return null;
+        LeaseRateDetails leaserateDetails = leaseRateService.getLeaserateDetails(id, mileage, duration, interestrate);
+        LeaseRateDto leaseRateDto = leaseRateMapper.toLeaseRateDto(leaserateDetails);
+        return Response.ok(leaseRateDto).build();
     }
 
     @Override
     public Response updateCar(Integer id, CarDto carDto) {
-        return null;
+        CarDetails carDetails = carMapper.toCarDetails(carDto);
+        int statusCode = carsClient.updateCar(id, carDetails);
+
+        if (statusCode == Response.Status.NO_CONTENT.getStatusCode()) {
+            return Response.noContent().build();
+        } else {
+            throw new InternalServerErrorException("Unknown status code: " + statusCode);
+        }
     }
 
 }

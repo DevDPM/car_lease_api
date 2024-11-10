@@ -1,13 +1,13 @@
 openapi: 3.0.3
 info:
-  title: Leaserate service
-  description: REST Composite service about leaserate details
+  title: LeaseRate service
+  description: REST Composite service about leaseRate details
   version: 0.1.0
 paths:
   '/cars/{id}/leaserate':
     get:
       tags:
-        - leaserate
+        - leaseRate
       summary: Retrieve lease rate details
       operationId: get
       parameters:
@@ -54,5 +54,5 @@ components:
     LeaseRateDetails:
       type: object
       properties:
-        leaserate:
+        leaseRate:
           type: number

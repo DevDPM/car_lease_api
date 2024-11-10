@@ -13,13 +13,13 @@ import java.math.BigDecimal;
 import java.net.URI;
 
 @Dependent
-public class LeaserateClient {
+public class LeaseRateClient {
 
     private final URI leaseRateURI = URI.create("http://localhost:8002/");
 
     public LeaseRateDetails getLeaserateDetails(Integer carId, Integer mileage, Integer duration, BigDecimal interestrate) {
         try {
-            return getLeaserateApi().get(carId, mileage, duration, interestrate);
+            return getLeaseRateApi().get(carId, mileage, duration, interestrate);
         } catch (ApiException apiException) {
             Response response = apiException.getResponse();
 
@@ -33,10 +33,10 @@ public class LeaserateClient {
         }
     }
 
-    private LeaserateApi getLeaserateApi() {
+    private LeaseRateApi getLeaseRateApi() {
         return RestClientBuilder.newBuilder()
                 .baseUri(leaseRateURI)
                 .register(JwtAuthTokenProvider.class)
-                .build(LeaserateApi.class);
+                .build(LeaseRateApi.class);
     }
 }

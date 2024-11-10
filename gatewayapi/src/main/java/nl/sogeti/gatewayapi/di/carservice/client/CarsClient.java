@@ -90,4 +90,12 @@ public class CarsClient {
             throw new InternalServerErrorException(e.getMessage());
         }
     }
+
+    public int updateCar(Integer id, CarDetails carDetails) {
+        try (Response response = getCarsApi().update(id, carDetails)) {
+            return response.getStatus();
+        } catch (ApiException | ProcessingException e) {
+            throw new InternalServerErrorException(e.getMessage());
+        }
+    }
 }
