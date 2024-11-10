@@ -2,8 +2,8 @@ package nl.sogeti.leaserateservice.service;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
-import nl.sogeti.leaserateservice.di.carservice.dto.CarDetails;
 import nl.sogeti.leaserateservice.di.carservice.client.CarsApiClient;
+import nl.sogeti.leaserateservice.di.carservice.dto.CarDetails;
 import nl.sogeti.leaserateservice.domain.LeaserateCalculator;
 import nl.sogeti.leaserateservice.dto.LeaseRateDetails;
 
@@ -21,14 +21,14 @@ public class LeaserateService {
 
     public LeaseRateDetails getLeaserateDetails(Integer carId, Integer mileage, Integer duration, BigDecimal interestrate) {
         CarDetails carDetails = carsApiClient.getCarDetails(carId);
-        BigDecimal leaseRatePerMonth = getLeaseratePerMonth(mileage, duration, carDetails.getNett(), interestrate);
+        BigDecimal leaseRatePerMonth = getLeaseRatePerMonth(mileage, duration, carDetails.getNett(), interestrate);
 
         LeaseRateDetails leaseRateDetails = new LeaseRateDetails();
-        leaseRateDetails.setLeaserate(leaseRatePerMonth);
+        leaseRateDetails.setLeaseRate(leaseRatePerMonth);
         return leaseRateDetails;
     }
 
-    private BigDecimal getLeaseratePerMonth(Integer mileage, Integer durationInMonths, BigDecimal nettPrice, BigDecimal interestrate) {
+    private BigDecimal getLeaseRatePerMonth(Integer mileage, Integer durationInMonths, BigDecimal nettPrice, BigDecimal interestrate) {
         return LeaserateCalculator.getInstance()
                                   .mileage(BigDecimal.valueOf(mileage))
                                   .duration(BigDecimal.valueOf(durationInMonths))

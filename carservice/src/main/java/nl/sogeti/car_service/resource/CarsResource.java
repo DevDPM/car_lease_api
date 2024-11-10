@@ -60,7 +60,7 @@ public class CarsResource implements CarsApi {
     @Transactional
     @RolesAllowed({ "Fun-User" })
     public Response update(Integer id, CarDetails carDetails) {
-        CarEntity carEntity = carRepository.findById(id.longValue());
+        CarEntity carEntity = getcarEntity(id);
         carMapper.updateCarEntity(carEntity, carDetails);
 
         return Response.noContent().build();

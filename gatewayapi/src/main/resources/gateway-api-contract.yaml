@@ -1,0 +1,323 @@
+openapi: 3.0.3
+info:
+  title: gateway api
+  description: REST Gateway Composite service about car lease
+  version: 0.1.0
+paths:
+  #car service
+  '/cars/{id}':
+    get:
+      tags:
+        - cars
+      summary: Retrieve car details
+      operationId: getCar
+      parameters:
+        - name: id
+          in: path
+          description: id of car
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+        "404":
+          description: Not Found
+    put:
+      tags:
+        - cars
+      summary: Retrieve car details
+      operationId: updateCar
+      parameters:
+        - name: id
+          in: path
+          description: id of car
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update car by id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    delete:
+      tags:
+        - cars
+      summary: Retrieve car details
+      operationId: deleteCar
+      parameters:
+        - name: id
+          in: path
+          description: id of car
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  '/cars':
+    get:
+      tags:
+        - cars
+      summary: Retrieve all cars details
+      operationId: getAllCars
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cars'
+    post:
+      tags:
+        - cars
+      summary: Retrieve all cars details
+      operationId: createCar
+      requestBody:
+        description: Update car by id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+      responses:
+        "201":
+          description: Created
+        "409":
+          description: Conflict
+
+  #leaserate service
+  '/cars/{id}/leaserate':
+    get:
+      tags:
+        - leaserate
+      summary: Retrieve lease rate details
+      operationId: getLeaserate
+      parameters:
+        - name: id
+          in: path
+          description: id of car
+          required: true
+          schema:
+            type: integer
+        - name: mileage
+          in: query
+          description: the amount of kilometers on annual base
+          required: true
+          schema:
+            type: integer
+        - name: duration
+          in: query
+          description: the number of months in the contract
+          required: true
+          schema:
+            type: integer
+        - name: interestrate
+          in: query
+          description: Interest rate with startdate
+          required: true
+          schema:
+            type: number
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseRate'
+        "404":
+          description: Car not found
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+
+  # customer service
+  '/customers/{id}':
+    get:
+      tags:
+        - customer
+      summary: Retrieve customer details
+      operationId: getCustomer
+      parameters:
+        - name: id
+          in: path
+          description: id of customer
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+    put:
+      tags:
+        - customer
+      summary: Retrieve customer details
+      operationId: updateCustomer
+      parameters:
+        - name: id
+          in: path
+          description: id of customer
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update customer by id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    delete:
+      tags:
+        - customer
+      summary: Retrieve customer details
+      operationId: deleteCustomer
+      parameters:
+        - name: id
+          in: path
+          description: id of customer
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  '/customers':
+    get:
+      tags:
+        - customer
+      summary: Retrieve all customers details
+      operationId: getAllCustomers
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customers'
+    post:
+      tags:
+        - customer
+      summary: Retrieve all customers details
+      operationId: createCustomer
+      requestBody:
+        description: Update customer by id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        "201":
+          description: Created
+        "409":
+          description: Conflict
+  '/login/{name}':
+    get:
+      tags:
+        - authentication
+      summary: Retrieve JWT for authentication
+      operationId: getJWT
+      parameters:
+        - name: name
+          in: path
+          description: name of person
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JwtWrapper'
+
+components:
+  schemas:
+    # leaserate service
+    LeaseRate:
+      type: object
+      properties:
+        leaseRate:
+          type: number
+    # car service
+    Cars:
+      type: object
+      properties:
+        cars:
+          type: array
+          items:
+            $ref: '#/components/schemas/Car'
+    Car:
+      type: object
+      properties:
+        make:
+          type: string
+        model:
+          type: string
+        version:
+          type: string
+        numberOfDoors:
+          type: integer
+        carbonDioxideEmission:
+          type: number
+        gross:
+          type: number
+        nett:
+          type: number
+    # customer service
+    Customers:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+        street:
+          type: string
+        houseNumber:
+          type: string
+        zipCode:
+          type: string
+        place:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+    JwtWrapper:
+      type: object
+      properties:
+        jsonWebToken:
+          type: string

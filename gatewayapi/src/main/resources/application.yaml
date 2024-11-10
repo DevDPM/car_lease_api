@@ -1,0 +1,22 @@
+quarkus:
+  http:
+    port: 8003
+
+  smallrye-jwt:
+    enabled: true
+  native:
+    resources:
+      includes: publicKey.pem
+
+mp:
+  jwt:
+    verify:
+      issuer: http://localhost:9999/
+      publickey:
+        location: publicKey.pem
+
+smallrye:
+  jwt:
+    sign:
+      key:
+        location: privateKey.pem
