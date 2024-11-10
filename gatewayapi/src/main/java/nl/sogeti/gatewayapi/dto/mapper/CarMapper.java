@@ -33,17 +33,6 @@ public interface CarMapper {
     })
     CarDetails toCarDetails(CarDto carDto);
 
-    @Mappings(value = {
-            @Mapping(source = "make", target = "make"),
-            @Mapping(source = "model", target = "model"),
-            @Mapping(source = "version", target = "version"),
-            @Mapping(source = "numberOfDoors", target = "numberOfDoors"),
-            @Mapping(source = "carbonDioxideEmission", target = "carbonDioxideEmission"),
-            @Mapping(source = "gross", target = "gross"),
-            @Mapping(source = "nett", target = "nett")
-    })
-    void updateCarDetails(@MappingTarget CarDetails carDetails, CarDto carDto);
-
     default CarsDto toCarsDto(List<CarDetails> carsDetails) {
         List<CarDto> carDetailsList = mapToCarDto(carsDetails);
         CarsDto carsDto = new CarsDto();
