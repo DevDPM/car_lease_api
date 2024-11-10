@@ -5,10 +5,10 @@ import jakarta.ws.rs.InternalServerErrorException;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.ProcessingException;
 import jakarta.ws.rs.core.Response;
+import nl.sogeti.gatewayapi.di.carservice.ApiException;
+import nl.sogeti.gatewayapi.di.carservice.CarsApi;
+import nl.sogeti.gatewayapi.di.carservice.dto.CarDetails;
 import nl.sogeti.gatewayapi.di.common.provider.JwtAuthTokenProvider;
-import nl.sogeti.leaserateservice.di.carservice.client.ApiException;
-import nl.sogeti.leaserateservice.di.carservice.client.CarsApi;
-import nl.sogeti.leaserateservice.di.carservice.dto.CarDetails;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
 import java.net.URI;
@@ -16,7 +16,16 @@ import java.net.URI;
 @Dependent
 public class CarsClient {
 
-    private final URI CarsURI = URI.create("http://localhost:8001/");
+    private final URI carsURI = URI.create("http://localhost:8001/");
+
+    public URI createCar(CarDetails carDetails) {
+        try {
+            Response response = getCarsApi().create(carDetails);
+            return response.getLocation();
+        } catch (ApiException | ProcessingException e) {
+            throw new InternalServerErrorException(e.getMessage());
+        }
+    }
 
     public CarDetails getCarDetails(Integer carId) {
         try {
@@ -36,7 +45,7 @@ public class CarsClient {
 
     private CarsApi getCarsApi() {
         return RestClientBuilder.newBuilder()
-                .baseUri(CarsURI)
+                .baseUri(carsURI)
                 .register(JwtAuthTokenProvider.class)
                 .build(CarsApi.class);
     }

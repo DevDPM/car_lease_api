@@ -2,7 +2,7 @@ package nl.sogeti.leaserateservice.service;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
-import nl.sogeti.leaserateservice.di.carservice.dto.CarDetails;
+import nl.sogeti.gatewayapi.di.carservice.dto.CarDetails;
 import nl.sogeti.leaserateservice.di.carservice.client.CarsApiClient;
 import nl.sogeti.leaserateservice.domain.LeaserateCalculator;
 import nl.sogeti.leaserateservice.dto.LeaseRateDetails;

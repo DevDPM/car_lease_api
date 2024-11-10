@@ -179,8 +179,8 @@
                             <configOptions>
                                 <returnResponse>true</returnResponse>
                                 <interfaceOnly>true</interfaceOnly>
-                                <apiPackage>nl.sogeti.leaserateservice.resource</apiPackage>
-                                <modelPackage>nl.sogeti.leaserateservice.dto</modelPackage>
+                                <apiPackage>nl.sogeti.gatewayapi.resource</apiPackage>
+                                <modelPackage>nl.sogeti.gatewayapi.dto</modelPackage>
                                 <openApiNullable>false</openApiNullable>
                                 <sourceFolder>src/gen/main/java</sourceFolder>
                                 <useJakartaEe>true</useJakartaEe>
@@ -189,7 +189,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>generate rest client customer</id>
+                        <id>generate rest client dto customer </id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
@@ -197,7 +197,7 @@
                             <generatorName>java</generatorName>
                             <library>microprofile</library>
                             <modelPackage>true</modelPackage>
-                            <generateApis>true</generateApis> <!-- Jakarta config not working, Create client/dto's manually -->
+                            <generateApis>false</generateApis> <!-- Jakarta config not working, Create client/dto's manually -->
                             <generateSupportingFiles>true</generateSupportingFiles>
                             <generateApiTests>false</generateApiTests>
                             <generateModelTests>false</generateModelTests>
@@ -208,13 +208,13 @@
                                 <interfaceOnly>false</interfaceOnly>
                                 <serializableModel>true</serializableModel>
                                 <sourceFolder>src/gen/main/java</sourceFolder>
-                                <modelPackage>nl.sogeti.leaserateservice.di.customerservice.dto</modelPackage>
-                                <apiPackage>nl.sogeti.leaserateservice.di.customerservice.client</apiPackage>
+                                <modelPackage>nl.sogeti.gatewayapi.di.customerservice.dto</modelPackage>
+<!--                                <apiPackage>nl.sogeti.gatewayapi.di.customerservice.client</apiPackage>-->
                             </configOptions>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>generate rest client cars</id>
+                        <id>generate rest client dto cars</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
@@ -222,7 +222,7 @@
                             <generatorName>java</generatorName>
                             <library>microprofile</library>
                             <modelPackage>true</modelPackage>
-                            <generateApis>true</generateApis> <!-- Jakarta config not working, Create client/dto's manually -->
+                            <generateApis>false</generateApis> <!-- Jakarta config not working, Create client/dto's manually -->
                             <generateSupportingFiles>true</generateSupportingFiles>
                             <generateApiTests>false</generateApiTests>
                             <generateModelTests>false</generateModelTests>
@@ -233,8 +233,8 @@
                                 <interfaceOnly>false</interfaceOnly>
                                 <serializableModel>true</serializableModel>
                                 <sourceFolder>src/gen/main/java</sourceFolder>
-                                <modelPackage>nl.sogeti.leaserateservice.di.carservice.dto</modelPackage>
-                                <apiPackage>nl.sogeti.leaserateservice.di.carservice.client</apiPackage>
+                                <modelPackage>nl.sogeti.gatewayapi.di.carservice.dto</modelPackage>
+<!--                                <apiPackage>nl.sogeti.gatewayapi.di.carservice.client</apiPackage>-->
                             </configOptions>
                         </configuration>
                     </execution>
@@ -258,8 +258,8 @@
                                 <interfaceOnly>false</interfaceOnly>
                                 <serializableModel>true</serializableModel>
                                 <sourceFolder>src/gen/main/java</sourceFolder>
-                                <modelPackage>nl.sogeti.leaserateservice.di.leaserateservice.dto</modelPackage>
-                                <apiPackage>nl.sogeti.leaserateservice.di.leaserateservice.client</apiPackage>
+                                <modelPackage>nl.sogeti.gatewayapi.di.leaserateservice.dto</modelPackage>
+                                <apiPackage>nl.sogeti.gatewayapi.di.leaserateservice.client</apiPackage>
                             </configOptions>
                         </configuration>
                     </execution>

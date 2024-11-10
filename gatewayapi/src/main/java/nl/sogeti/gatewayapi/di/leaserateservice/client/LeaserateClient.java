@@ -6,9 +6,7 @@ import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.ProcessingException;
 import jakarta.ws.rs.core.Response;
 import nl.sogeti.gatewayapi.di.common.provider.JwtAuthTokenProvider;
-import nl.sogeti.leaserateservice.di.leaserateservice.client.ApiException;
-import nl.sogeti.leaserateservice.di.leaserateservice.client.LeaserateApi;
-import nl.sogeti.leaserateservice.di.leaserateservice.dto.LeaseRateDetails;
+import nl.sogeti.gatewayapi.di.leaserateservice.dto.LeaseRateDetails;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
 import java.math.BigDecimal;

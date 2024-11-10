@@ -6,9 +6,9 @@ import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.ProcessingException;
 import jakarta.ws.rs.core.Response;
 import nl.sogeti.gatewayapi.di.common.provider.JwtAuthTokenProvider;
-import nl.sogeti.leaserateservice.di.customerservice.client.ApiException;
-import nl.sogeti.leaserateservice.di.customerservice.client.CustomerApi;
-import nl.sogeti.leaserateservice.di.customerservice.dto.CustomerDetails;
+import nl.sogeti.gatewayapi.di.customerservice.ApiException;
+import nl.sogeti.gatewayapi.di.customerservice.CustomerApi;
+import nl.sogeti.gatewayapi.di.customerservice.dto.CustomerDetails;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
 import java.net.URI;

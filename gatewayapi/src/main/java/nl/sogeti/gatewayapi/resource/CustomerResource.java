@@ -2,8 +2,7 @@ package nl.sogeti.gatewayapi.resource;
 
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
-import nl.sogeti.leaserateservice.dto.CustomerDto;
-import nl.sogeti.leaserateservice.resource.CustomersApi;
+import nl.sogeti.gatewayapi.dto.CustomerDto;
 
 @Provider
 public class CustomerResource implements CustomersApi {
