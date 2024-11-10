@@ -32,8 +32,7 @@ docker run --name carDB -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=carDB 
 ## JWT token, copy token and add in header as Authorization: Bearer {JWT-Token}
 
 ## Example gateway api:
-http://localhost:8003/login/{username} <br>
--> use jwt token for further calls with gateway api <br>
+http://localhost:8003/login/{username} -> use jwt token for further calls with gateway api <br>
 http://localhost:8003/cars/1 <br>
 http://localhost:8003/customers/1 <br>
 http://localhost:8003/cars/1/leaserate?mileage=45000&duration=60&interestrate=4.5 <br>
