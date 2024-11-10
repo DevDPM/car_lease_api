@@ -23,7 +23,7 @@ docker run --name customerDB -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=c
 #### Start MySQL DB via docker for car service
 docker run --name carDB -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=carDB -p 3307:3306 mysql:8.0
 
-#### Run all applications locally
+#### Run all applications locally <br><br>
 
 
 #### Authentication & Endpoints API:
