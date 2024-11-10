@@ -36,9 +36,9 @@ docker run --name carDB -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=carDB 
 [GET/POST] http://localhost:8003/customers <br>
 [GET] http://localhost:8003/cars/1/leaserate?mileage=45000&duration=60&interestrate=4.5 <br>
 
-## Auth Info for microservices below:
-## For testing purpose go to endpoint without auth and get 401, terminal will output 
-## JWT token, copy token and add in header as Authorization: Bearer {JWT-Token}, expiry time: 5 min
+# Auth Info for microservices below:
+# For testing purpose go to endpoint without auth and get 401, terminal will output 
+# JWT token, copy token and add in header as Authorization: Bearer {JWT-Token}, expiry time: 5 min
 
 ## Example customers endpoint:
 [GET/PUT/DELETE] http://localhost:8000/customers/1 <br>
