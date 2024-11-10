@@ -14,21 +14,21 @@
 
 #### Start the application with the following steps/commands:
 
-# Install all microservices
+#### Install all microservices
 mvn clean install
 
-# Start MySQL DB via docker for customer service
+#### Start MySQL DB via docker for customer service
 docker run --name customerDB -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=customerDB -p 3306:3306 mysql:8.0
 
-# Start MySQL DB via docker for car service
+#### Start MySQL DB via docker for car service
 docker run --name carDB -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=carDB -p 3307:3306 mysql:8.0
 
-# Run all applications locally
+#### Run all applications locally
 
 
-#### Authentication & Endpoints Per microservice:
+#### Authentication & Endpoints API:
 
-## Example gateway api:
+#### Example gateway api:
 [GET] http://localhost:8003/login/{username} -> use jwt token for further calls with gateway api <br>
 [GET/PUT/DELETE] http://localhost:8003/cars/1 <br>
 [GET/POST] http://localhost:8003/cars <br>
@@ -36,19 +36,20 @@ docker run --name carDB -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=carDB 
 [GET/POST] http://localhost:8003/customers <br>
 [GET] http://localhost:8003/cars/1/leaserate?mileage=45000&duration=60&interestrate=4.5 <br>
 
-# Auth Info for microservices below:
-# For testing purpose go to endpoint without auth and get 401, terminal will output 
-# JWT token, copy token and add in header as Authorization: Bearer {JWT-Token}, expiry time: 5 min
+#### Authentication & Endpoints per microservice:
+Auth Info for microservices below: <br>
+For testing purpose go to endpoint without auth and get 401, terminal will output  <br>
+JWT token, copy token and add in header as Authorization: Bearer {JWT-Token}, expiry time: 5 min <br>
 
-## Example customers endpoint:
+##### Example customers endpoint:
 [GET/PUT/DELETE] http://localhost:8000/customers/1 <br>
 [GET/POST] http://localhost:8000/customers <br>
 
-## Example cars endpoint:
+##### Example cars endpoint:
 [GET/PUT/DELETE] http://localhost:8001/cars/1 <br>
 [GET/POST] http://localhost:8001/cars <br>
 
-## Example leaserate endpoint:
+##### Example leaserate endpoint:
 [GET] http://localhost:8002/cars/1/leaserate?mileage=45000&duration=60&interestrate=4.5
 
 
