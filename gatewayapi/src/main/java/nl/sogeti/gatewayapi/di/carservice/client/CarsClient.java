@@ -4,7 +4,6 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.ws.rs.InternalServerErrorException;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.ProcessingException;
-import jakarta.ws.rs.core.NoContentException;
 import jakarta.ws.rs.core.Response;
 import nl.sogeti.gatewayapi.di.carservice.exception.ApiException;
 import nl.sogeti.gatewayapi.di.carservice.dto.CarDetails;
@@ -12,6 +11,7 @@ import nl.sogeti.gatewayapi.di.common.provider.JwtAuthTokenProvider;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @Dependent
 public class CarsClient {
@@ -80,6 +80,14 @@ public class CarsClient {
 
         } catch (ProcessingException processingException) {
             throw new InternalServerErrorException(processingException.getMessage());
+        }
+    }
+
+    public List<CarDetails> getAllCars() {
+        try {
+            return getCarsApi().getAll().getCars();
+        } catch (ApiException | ProcessingException e) {
+            throw new InternalServerErrorException(e.getMessage());
         }
     }
 }

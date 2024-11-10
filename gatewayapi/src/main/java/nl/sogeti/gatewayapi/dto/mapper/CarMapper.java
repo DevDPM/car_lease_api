@@ -44,14 +44,14 @@ public interface CarMapper {
     })
     void updateCarDetails(@MappingTarget CarDetails carDetails, CarDto carDto);
 
-    default CarsDto toCarsDetails(List<CarDetails> carsDetails) {
-        List<CarDto> carDetailsList = mapToCarDetailsList(carsDetails);
+    default CarsDto toCarsDto(List<CarDetails> carsDetails) {
+        List<CarDto> carDetailsList = mapToCarDto(carsDetails);
         CarsDto carsDto = new CarsDto();
         carsDto.setCars(carDetailsList);
         return carsDto;
     }
 
-    private List<CarDto> mapToCarDetailsList(List<CarDetails> carsDetails) {
+    private List<CarDto> mapToCarDto(List<CarDetails> carsDetails) {
         return carsDetails.stream()
                           .map(this::toCarDto)
                           .toList();

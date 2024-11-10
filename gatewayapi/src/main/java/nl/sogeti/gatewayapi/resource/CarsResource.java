@@ -2,17 +2,18 @@ package nl.sogeti.gatewayapi.resource;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.InternalServerErrorException;
-import jakarta.ws.rs.core.NoContentException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
 import nl.sogeti.gatewayapi.di.carservice.client.CarsClient;
 import nl.sogeti.gatewayapi.di.carservice.dto.CarDetails;
 import nl.sogeti.gatewayapi.di.leaserateservice.client.LeaserateClient;
 import nl.sogeti.gatewayapi.dto.CarDto;
+import nl.sogeti.gatewayapi.dto.CarsDto;
 import nl.sogeti.gatewayapi.dto.mapper.CarMapper;
 
 import java.math.BigDecimal;
 import java.net.URI;
+import java.util.List;
 
 @Provider
 public class CarsResource implements CarsApi {
@@ -50,7 +51,9 @@ public class CarsResource implements CarsApi {
 
     @Override
     public Response getAllCars() {
-        return null;
+        List<CarDetails> carsDetails = carsClient.getAllCars();
+        CarsDto carsDto = carMapper.toCarsDto(carsDetails);
+        return Response.ok(carsDto).build();
     }
 
     @Override
