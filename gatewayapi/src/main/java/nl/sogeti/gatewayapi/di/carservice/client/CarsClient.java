@@ -30,11 +30,11 @@ public class CarsClient {
         String responsePath = response.getLocation().getPath();
         String[] paths = responsePath.split("/");
         String carIdAsString = paths[paths.length - 1];
-        Long carId = Long.getLong(carIdAsString, null);
-        if (carId == null) {
+        try {
+            return Long.valueOf(carIdAsString);
+        } catch (NumberFormatException e) {
             throw new InternalServerErrorException("Unable to extract car id: " + carIdAsString + " from: " + responsePath);
         }
-        return carId;
     }
 
     public CarDetails getCarDetails(Integer carId) {

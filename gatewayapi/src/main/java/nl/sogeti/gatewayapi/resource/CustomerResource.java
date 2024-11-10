@@ -1,5 +1,6 @@
 package nl.sogeti.gatewayapi.resource;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.InternalServerErrorException;
 import jakarta.ws.rs.core.Response;
@@ -13,6 +14,7 @@ import java.net.URI;
 import java.util.List;
 
 @Provider
+@RolesAllowed({"User"})
 public class CustomerResource implements CustomersApi {
 
     private final CustomerClient customerClient;
@@ -61,10 +63,10 @@ public class CustomerResource implements CustomersApi {
         CustomerDetails customerDetails = customerMapper.toCustomerDetails(customerDto);
         int statusCode = customerClient.updateCustomer(id, customerDetails);
 
-        if (statusCode == Response.Status.NO_CONTENT.getStatusCode()) {
-            return Response.noContent().build();
-        } else {
-            throw new InternalServerErrorException("Unknown status code: " + statusCode);
-        }
+        return switch (statusCode) {
+            case 204 -> Response.noContent().build();
+            case 404 -> Response.status(Response.Status.NOT_FOUND).build();
+            default -> throw new InternalServerErrorException("Unknown status code: " + statusCode);
+        };
     }
 }

@@ -49,6 +49,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "404":
+          description: Not Found
     delete:
       tags:
         - cars
@@ -186,6 +188,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "404":
+          description: Not Found
     delete:
       tags:
         - customer
@@ -233,6 +237,26 @@ paths:
           description: Created
         "409":
           description: Conflict
+  '/login/{name}':
+    get:
+      tags:
+        - authentication
+      summary: Retrieve JWT for authentication
+      operationId: getJWT
+      parameters:
+        - name: name
+          in: path
+          description: name of person
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JwtWrapper'
 
 components:
   schemas:
@@ -291,4 +315,9 @@ components:
         email:
           type: string
         phoneNumber:
+          type: string
+    JwtWrapper:
+      type: object
+      properties:
+        jsonWebToken:
           type: string

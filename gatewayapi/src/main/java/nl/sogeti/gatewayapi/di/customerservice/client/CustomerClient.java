@@ -44,21 +44,21 @@ public class CustomerClient {
 
     public Long createCustomer(CustomerDetails customerDetails) {
         try (Response response = getCustomerApi().create(customerDetails)) {
-            return extractCarId(response);
+            return extractCustomerId(response);
         } catch (ApiException | ProcessingException e) {
             throw new InternalServerErrorException(e.getMessage());
         }
     }
 
-    private static Long extractCarId(Response response) {
+    private static Long extractCustomerId(Response response) {
         String responsePath = response.getLocation().getPath();
         String[] paths = responsePath.split("/");
-        String carIdAsString = paths[paths.length - 1];
-        Long carId = Long.getLong(carIdAsString, null);
-        if (carId == null) {
-            throw new InternalServerErrorException("Unable to extract customer id: " + carIdAsString + " from: " + responsePath);
+        String customerIdAsString = paths[paths.length - 1];
+        try {
+            return Long.valueOf(customerIdAsString);
+        } catch (NumberFormatException e) {
+            throw new InternalServerErrorException("Unable to extract customer id: " + customerIdAsString + " from: " + responsePath);
         }
-        return carId;
     }
 
     public int deleteCustomer(Integer id) {

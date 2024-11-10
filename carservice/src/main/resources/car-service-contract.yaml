@@ -48,6 +48,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "404":
+          description: Not Found
     delete:
       tags:
         - cars

@@ -59,7 +59,7 @@ public class CustomersResource implements CustomersApi {
     @Transactional
     @RolesAllowed({ "Fun-User" })
     public Response update(Integer id, CustomerDetails customerDetails) {
-        CustomerEntity customerEntity = customerRepository.findById(id.longValue());
+        CustomerEntity customerEntity = getCustomerEntity(id);
         customerMapper.updateCustomerEntity(customerEntity, customerDetails);
 
         return Response.noContent().build();

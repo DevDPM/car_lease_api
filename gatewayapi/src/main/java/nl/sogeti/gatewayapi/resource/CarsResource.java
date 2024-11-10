@@ -1,5 +1,6 @@
 package nl.sogeti.gatewayapi.resource;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.InternalServerErrorException;
 import jakarta.ws.rs.core.Response;
@@ -19,6 +20,7 @@ import java.net.URI;
 import java.util.List;
 
 @Provider
+@RolesAllowed({"User"})
 public class CarsResource implements CarsApi {
 
     private final CarsClient carsClient;
@@ -79,11 +81,11 @@ public class CarsResource implements CarsApi {
         CarDetails carDetails = carMapper.toCarDetails(carDto);
         int statusCode = carsClient.updateCar(id, carDetails);
 
-        if (statusCode == Response.Status.NO_CONTENT.getStatusCode()) {
-            return Response.noContent().build();
-        } else {
-            throw new InternalServerErrorException("Unknown status code: " + statusCode);
-        }
+        return switch (statusCode) {
+            case 204 -> Response.noContent().build();
+            case 404 -> Response.status(Response.Status.NOT_FOUND).build();
+            default -> throw new InternalServerErrorException("Unknown status code: " + statusCode);
+        };
     }
 
 }
