@@ -3,9 +3,9 @@ package nl.sogeti.leaserateservice.di.carservice.client;
 import jakarta.enterprise.context.Dependent;
 import jakarta.ws.rs.InternalServerErrorException;
 import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.ProcessingException;
 import jakarta.ws.rs.core.Response;
 import nl.sogeti.leaserateservice.di.carservice.dto.CarDetails;
-import nl.sogeti.leaserateservice.di.carservice.exception.ApiException;
 import nl.sogeti.leaserateservice.di.carservice.provider.JwtAuthTokenProvider;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
@@ -27,6 +27,8 @@ public class CarsApiClient {
             } else {
                 throw new InternalServerErrorException(apiException.getMessage());
             }
+        } catch (ProcessingException processingException) {
+            throw new InternalServerErrorException(processingException.getMessage());
         }
     }
 
