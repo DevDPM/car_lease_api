@@ -5,7 +5,6 @@ import jakarta.ws.rs.InternalServerErrorException;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.Response;
 import nl.sogeti.leaserateservice.di.carservice.dto.CarDetails;
-import nl.sogeti.leaserateservice.di.carservice.exception.ApiException;
 import nl.sogeti.leaserateservice.di.carservice.provider.JwtAuthTokenProvider;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
