@@ -17,6 +17,15 @@
 #### Install all microservices
 mvn clean install
 
+#### build services
+use command for each package: <br>
+mvn clean package
+
+docker build -f src/main/docker/Dockerfile.jvm -t quarkus/carservice-jvm .
+docker build -f src/main/docker/Dockerfile.jvm -t quarkus/customerservice-jvm .
+docker build -f src/main/docker/Dockerfile.jvm -t quarkus/gatewayapi-jvm .
+docker build -f src/main/docker/Dockerfile.jvm -t quarkus/leaserateservice-jvm .
+
 #### Start MySQL DB via docker for customer service
 docker run --name customerDB -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=customerDB -p 3306:3306 mysql:8.0
 

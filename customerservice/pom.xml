@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>nl.sogeti.customerservice</groupId>
+    <groupId>nl.sog.customerservice</groupId>
     <artifactId>customeservice</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -217,8 +217,8 @@
                             <configOptions>
                                 <returnResponse>true</returnResponse>
                                 <interfaceOnly>true</interfaceOnly>
-                                <apiPackage>nl.sogeti.customerservice.resource</apiPackage>
-                                <modelPackage>nl.sogeti.customerservice.dto</modelPackage>
+                                <apiPackage>nl.sog.customerservice.resource</apiPackage>
+                                <modelPackage>nl.sog.customerservice.dto</modelPackage>
                                 <openApiNullable>false</openApiNullable>
                                 <sourceFolder>src/gen/main/java</sourceFolder>
                                 <useJakartaEe>true</useJakartaEe>
